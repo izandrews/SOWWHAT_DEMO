@@ -42,7 +42,7 @@ const DEBUG_START_SCENE = "title_scene"; // or "season1_stats", "season1_plantin
 var config = {
     type: Phaser.AUTO,
     backgroundColor: "#ffb000",
-    width: 1080,
+    width: 1280,
     height: 720,
 
     scene: [
