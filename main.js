@@ -37,7 +37,7 @@ import musicscene from "./src/musicscene.js";
 
 // Set this to a scene key (example: "planting_minigame") to jump directly there during development.
 // Leave as null to keep normal startup flow.
-const DEBUG_START_SCENE = "trade_slots"; // or "season1_stats", "season1_planting", etc. for testing specific scenes
+const DEBUG_START_SCENE = "title_scene"; // or "season1_stats", "season1_planting", etc. for testing specific scenes
 
 var config = {
     type: Phaser.AUTO,

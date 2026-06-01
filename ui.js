@@ -13,7 +13,7 @@ export function centerText(scene, msg, yOffset = -80, style = {}) {
             fontFamily: style.fontFamily || 'PressStart2P',
             fill: style.fill || COLORS.PRIMARY_BLUE,
             align: style.align || 'justify',
-            wordWrap: style.wordWrap || { width: width * .7, useAdvancedWrap: true},
+            wordWrap: style.wordWrap || { width: width * .71, useAdvancedWrap: true},
             lineSpacing: style.lineSpacing || 10
         }
     ).setOrigin(0.5, 0);
@@ -33,7 +33,7 @@ export function createTypewriterText(scene, fullText, yOffset = 0, style = {}, s
             fontFamily: style.fontFamily || 'PressStart2P',
             fill: style.fill || COLORS.PRIMARY_BLUE,
             align: style.align || 'left',
-            wordWrap: style.wordWrap || { width: width * .7, useAdvancedWrap: true},
+            wordWrap: style.wordWrap || { width: width * .71, useAdvancedWrap: true},
             lineSpacing: style.lineSpacing || 10
         }
     ).setOrigin(0, 0);
