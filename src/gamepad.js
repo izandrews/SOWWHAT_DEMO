@@ -1,8 +1,7 @@
-// src/gamepad.js
-
 export const GAMEPAD = {
-    RESET_BUTTON: 0,
-    SELECT_BUTTON: 1,
+    RESET_BUTTON: 0,      // B0
+    SELECT_BUTTON: 11,    // B11
+
     DEADZONE: 0.45,
     MENU_REPEAT_DELAY: 180
 };
@@ -20,11 +19,29 @@ export function getStick(scene) {
     const pad = getPad(scene);
     if (!pad) return { x: 0, y: 0 };
 
-    const x = pad.axes[0]?.getValue() || 0;
-    const y = pad.axes[1]?.getValue() || 0;
+    const rawX = pad.axes[0]?.getValue() || 0;
+    const rawY = pad.axes[1]?.getValue() || 0;
+
+    /*
+        Physical joystick is rotated/mounted wrong:
+
+        Physical UP    reads as RIGHT  => rawX positive
+        Physical LEFT  reads as UP     => rawY negative
+        Physical RIGHT reads as DOWN   => rawY positive
+        Physical DOWN  reads as LEFT   => rawX negative
+
+        Desired logical mapping:
+        logical UP    = physical UP
+        logical DOWN  = physical DOWN
+        logical LEFT  = physical LEFT
+        logical RIGHT = physical RIGHT
+    */
+
+    const correctedX = rawY;
+    const correctedY = -rawX;
 
     return {
-        x: Math.abs(x) > GAMEPAD.DEADZONE ? x : 0,
-        y: Math.abs(y) > GAMEPAD.DEADZONE ? y : 0
+        x: Math.abs(correctedX) > GAMEPAD.DEADZONE ? correctedX : 0,
+        y: Math.abs(correctedY) > GAMEPAD.DEADZONE ? correctedY : 0
     };
 }
