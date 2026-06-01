@@ -1,7 +1,7 @@
 import { centerText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
-import { isButtonPressed, GAMEPAD } from "../gamepad.js";
+import { isButtonPressed, GAMEPAD } from "./gamepad.js";
 
 export default class inspection_chase extends Phaser.Scene {
     constructor() {

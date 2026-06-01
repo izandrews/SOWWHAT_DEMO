@@ -1,5 +1,5 @@
 import { COLORS, OFFSETS, TYPEWRITER_SPEED, FONTSIZE } from "./constants.js";
-import { isButtonPressed, GAMEPAD } from "./gamepad.js";
+import { isButtonPressed, GAMEPAD } from "./src/gamepad.js";
 
 export function centerText(scene, msg, yOffset = -80, style = {}) {
     const { width, height } = scene.scale;

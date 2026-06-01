@@ -2,7 +2,7 @@ import { centerText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
 import { COLORS, MINIGAME_CONFIG } from "../constants.js";
-import { isButtonPressed, GAMEPAD } from "../gamepad.js";
+import { isButtonPressed, GAMEPAD } from "./gamepad.js";
 
 export default class trade_slots extends Phaser.Scene {
     constructor() {

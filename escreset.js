@@ -1,4 +1,4 @@
-
+import { isButtonPressed, GAMEPAD } from "./src/gamepad.js";
 export function escapeReset(scene) {
     const esc = scene.input.keyboard.addKey(
         Phaser.Input.Keyboard.KeyCodes.ESC

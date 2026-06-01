@@ -93,7 +93,7 @@ var config = {
     },
     input: {
         keyboard: true,
-        gamepad: false
+        gamepad: true
     }
     
 };

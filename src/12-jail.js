@@ -2,7 +2,7 @@ import { centerText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
 import { COLORS, OFFSETS } from "../constants.js";
-import { getStick } from "../gamepad.js";
+import { getStick } from "./gamepad.js";
 
 export default class escape_jail extends Phaser.Scene {
     constructor() {
