@@ -1,0 +1,55 @@
+{ "frames": {
+   "inspector 0.png": {
+    "frame": { "x": 0, "y": 0, "w": 80, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 140 },
+    "sourceSize": { "w": 80, "h": 140 },
+    "duration": 100
+   },
+   "inspector 1.png": {
+    "frame": { "x": 80, "y": 0, "w": 80, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 140 },
+    "sourceSize": { "w": 80, "h": 140 },
+    "duration": 100
+   },
+   "inspector 2.png": {
+    "frame": { "x": 160, "y": 0, "w": 80, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 140 },
+    "sourceSize": { "w": 80, "h": 140 },
+    "duration": 100
+   },
+   "inspector 3.png": {
+    "frame": { "x": 240, "y": 0, "w": 80, "h": 140 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 140 },
+    "sourceSize": { "w": 80, "h": 140 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.17-arm64",
+  "image": "inspector.png",
+  "format": "RGBA8888",
+  "size": { "w": 320, "h": 140 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "skin", "opacity": 255, "blendMode": "normal" },
+   { "name": "clothes", "opacity": 255, "blendMode": "normal" },
+   { "name": "boots", "opacity": 255, "blendMode": "normal" },
+   { "name": "jacket", "opacity": 255, "blendMode": "normal" },
+   { "name": "neck tie", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
