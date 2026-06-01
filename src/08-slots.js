@@ -44,6 +44,8 @@ export default class trade_slots extends Phaser.Scene {
         const frameGraphics = this.add.graphics();
         const centerX = this.scale.width / 2 - 400;
         const centerY = this.scale.height / 2 - 240;
+        const frameCenterX = centerX + MINIGAME_CONFIG.WIDTH / 2;
+        const frameCenterY = centerY + MINIGAME_CONFIG.HEIGHT / 2;
 
         frameGraphics.fillStyle(0x1645f5, 0.8);
         frameGraphics.fillRect(centerX, centerY, MINIGAME_CONFIG.WIDTH, MINIGAME_CONFIG.HEIGHT);
@@ -79,8 +81,8 @@ export default class trade_slots extends Phaser.Scene {
 
         const slotWidth = 100;
         const slotHeight = 120;
-        const slotY = MINIGAME_CONFIG.HEIGHT / 2 + 140;
-        const startX = MINIGAME_CONFIG.WIDTH / 2 - 60;
+        const slotY = frameCenterY + 140;
+        const startX = frameCenterX - 200;
 
         this.add.rectangle(startX, slotY, slotWidth, slotHeight, 0xffffff);
         this.slot1 = this.add.text(startX, slotY, '?', {
@@ -104,8 +106,8 @@ export default class trade_slots extends Phaser.Scene {
         }).setOrigin(0.5);
 
         this.spinButton = this.add.rectangle(
-            MINIGAME_CONFIG.WIDTH / 2,
-            MINIGAME_CONFIG.HEIGHT / 2 + 150,
+            frameCenterX,
+            frameCenterY + 150,
             200,
             60,
             0x000000,

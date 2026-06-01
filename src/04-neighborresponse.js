@@ -1,7 +1,7 @@
 import { centerText, createTypewriterText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
-import { COLORS, FONTSIZE } from "../constants.js";
+import { COLORS, FONTSIZE, TYPEWRITER_SPEED } from "../constants.js";
 
 export default class neighbor_response extends Phaser.Scene {
     constructor() {
@@ -11,22 +11,43 @@ export default class neighbor_response extends Phaser.Scene {
     create() {
         escapeReset(this);
         if (this.game.globalState.certified == true) {
-            createTypewriterText(this, "your neighbors reject certification and are dissapointed with your betrayal to the community's traditional practices", 0, {fontSize: FONTSIZE.MENU});
+            // const neighborText = "your neighbors reject certification and are disappointed with your betrayal to the community's traditional practices";
+            createTypewriterText(this, "your neighbors reject certification and are disappointed with your betrayal to the community's traditional practices.", -40, { fill: "#ffffffff" }, TYPEWRITER_SPEED.FAST, () => {
+                createMenu(this, {
+                    title: [""],
+                    options: [
+                        "[ PLANT SEEDS ]",
+                    ],
+                    callbacks: [
+                        () => {
+                            this.game.globalState.neighborScore -= 1;
+                            this.scene.get('hud').updateStats();
+                            this.scene.start("planting_minigame");
+                        }
+                    ]
+                });
+            });
+
         } else {
-            createTypewriterText(this, "your neighbors accept certification, and your sense of community begins to falter", 0, {fontSize: FONTSIZE.MENU});
+            // const neighborText = "your neighbors accept certification, and your sense of community begins to falter";
+            createTypewriterText(this, "your neighbors accept certification, and your sense of community begins to falter.", -40, { fill: "#ffffffff" }, TYPEWRITER_SPEED.FAST, () => {
+                createMenu(this, {
+                    title: [""],
+                    options: [
+                        "[ PLANT SEEDS ]",
+                    ],
+                    callbacks: [
+                        () => {
+                            this.game.globalState.neighborScore -= 1;
+                            this.scene.get('hud').updateStats();
+                            this.scene.start("planting_minigame");
+                        }
+                    ]
+                });
+            });
         }
-        createMenu(this, {
-            title: [""],
-            options: [
-                "[ PLANT SEEDS ]",
-            ],
-            callbacks: [
-                () => {
-                    this.game.globalState.neighborScore -= 1;
-                    this.scene.get('hud').updateStats();
-                    this.scene.start("planting_minigame");
-                }
-            ]
-        });
+
+
+
     }
 }

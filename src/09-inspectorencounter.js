@@ -24,7 +24,7 @@ export default class inspector_encounter extends Phaser.Scene {
         });
         // createTypewriterText(this, "SEED INSPECTOR INCOMING...", -100, { fontSize: FONTSIZE.HEADING, fill: COLORS.BLACK }, TYPEWRITER_SPEED.DEFAULT, () => {
         if (this.game.globalState.certified == true) {
-            this.newsText = createTypewriterText(this, "\"looks like you've breached your seed contract. you owe " + this.game.globalState.fines + " gold in fines", OFFSETS.TYPEWRITER_BODY_Y, { fontSize: FONTSIZE.MENU, fill: COLORS.BLACK, wordWrap: { width: 700 }  }, TYPEWRITER_SPEED.FAST, () => {
+            this.newsText = createTypewriterText(this, "\"looks like you've breached your seed contract. you owe 22 gold in fines", OFFSETS.TYPEWRITER_BODY_Y, { fontSize: FONTSIZE.MENU, fill: COLORS.BLACK, wordWrap: { width: 780 }  }, TYPEWRITER_SPEED.FAST, () => {
             // createTypewriterText(this, "\n\"looks like you've breached your seed contract. pay 22 gold in fines to continue\"",
             //     OFFSETS.TYPEWRITER_BODY_Y, { fontSize: FONTSIZE.MENU, fill: COLORS.BLACK }, TYPEWRITER_SPEED.FAST, () => {
                     createMenu(this, {
@@ -43,7 +43,6 @@ export default class inspector_encounter extends Phaser.Scene {
                                 this.game.globalState.fines = 0;
 
                                 this.scene.get('hud').updateStats();
-                                this.scene.start("inspection_chase");
                             },
                             () => {
                                 this.game.globalState.fines *= 1.5;
@@ -60,7 +59,7 @@ export default class inspector_encounter extends Phaser.Scene {
                         highlightColor: COLORS.ACCENT_ORANGE // highlighted option color (orange)                
                     });
                 });
-        } else if (this.game.globalState.certified == false) {
+        } else  {
             this.game.globalState.fines = 20;
             this.scene.get('hud').updateStats();
             this.newsText = createTypewriterText(this, "\"looks like you've been illegally planting seeds. pay 22 gold in fines to continue\"", OFFSETS.TYPEWRITER_BODY_Y, { fontSize: FONTSIZE.MENU, fill: COLORS.BLACK, wordWrap: { width: 700 }  }, TYPEWRITER_SPEED.FAST,() => {
