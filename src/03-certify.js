@@ -13,7 +13,7 @@ export default class certify_choice extends Phaser.Scene {
         // shows hud
         escapeReset(this);
         // this.scene.setVisible(true, 'hud');
-        centerText(this, "RADIO ANNOUNCEMENT:", OFFSETS.SEASON_TITLE_Y, { fill: COLORS.TEXT, fontSize: FONTSIZE.HEADING, align: "center" });
+        centerText(this, "RADIO ANNOUNCEMENT:", OFFSETS.SEASON_TITLE_Y, { fill: COLORS.TEXT, fontSize: FONTSIZE.HEADING, align: "center",wordWrap: { width: 900 }  });
         const messageText = "\'" + this.game.globalState.cropL + " seeds are now patented by Monsanto. all farmers MUST use certified seeds from corporate suppliers. penalties for planting uncertified seeds include fines and loss of land tenure.'";
         createTypewriterText(this, messageText, -40, {fill: "#ffffffff"}, TYPEWRITER_SPEED.FAST,
             () => {

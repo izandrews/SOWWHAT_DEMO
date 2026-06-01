@@ -11,7 +11,6 @@ export default class title_scene extends Phaser.Scene {
         // preload assets here
         this.load.audio('menuMove', 'assets/sounds/move.wav');
         this.load.audio('menuSelect', 'assets/sounds/select.wav');
-        this.load.audio('backgroundMusic', 'assets/sounds/background_music.wav');
         this.load.font(
             'PressStart2P',
             'https://raw.githubusercontent.com/google/fonts/refs/heads/main/ofl/pressstart2p/PressStart2P-Regular.ttf',
@@ -19,16 +18,15 @@ export default class title_scene extends Phaser.Scene {
         // this.load.image("radio", "assets/ascii-art.jpeg");
     }
     create() {
-        // const music = this.sound.get('backgroundMusic');
+        const backgroundMusic = this.sound.get('backgroundMusic');
 
-        // if (music) {
-        //     music.resume(); // or play() if paused
-        // } else {
-        //     this.sound.add('backgroundMusic', {
-        //         loop: true,
-        //         volume: 0.6
-        //     }).play();
-        // }
+        if (backgroundMusic) {
+            if (backgroundMusic.isPaused) {
+                backgroundMusic.resume();
+            } else if (!backgroundMusic.isPlaying) {
+                backgroundMusic.play();
+            }
+        }
 
         this.cameras.main.setBackgroundColor("#1645f5");
         // centerText(this, "SOW WHAT?!", -100, { fontFamily: 'PressStart2P', fontSize: FONTSIZE.TITLE, fill: '#ffb000', align: "center" });

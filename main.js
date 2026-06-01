@@ -1,5 +1,4 @@
 import {
-    hud,
     title_scene,
     season1_intro,
     crop_choice,
@@ -30,7 +29,8 @@ import {
     inspection_chase,
     escape_jail,
     police_encounter,
-    enter_jail
+    enter_jail,
+    hud
 
 } from "./src/SCENES.js";
 import musicscene from "./src/musicscene.js";

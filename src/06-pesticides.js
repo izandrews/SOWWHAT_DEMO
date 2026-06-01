@@ -16,7 +16,7 @@ export default class season3_choice extends Phaser.Scene {
             createTypewriterText(this, "your certification contract requires that you purchase and use pesticides on your " + this.game.globalState.cropL + " crops. failure to comply may result in a fine.", 0, { fill: '#ffffff' }, TYPEWRITER_SPEED.FAST,
                 () => {
                     createMenu(this, {
-                        title: ["use pesticides?"],
+                        title: ["DO YOU CHOOSE TO USE PESTICIDES?"],
                         options: [
                             "[ USE PESTICIDES -8G]",
                             "[ REFUSE ]"
@@ -47,7 +47,7 @@ export default class season3_choice extends Phaser.Scene {
                     });
                 });
         } else {
-            createTypewriterText(this, "pests begin come onto your farm and infest your crops, reducing your yield and damaging your soil health. you question whether to purchase pesticides to protect your crops.", 0, { fill: '#ffffff' }, TYPEWRITER_SPEED.FAST,
+            createTypewriterText(this, "pests come onto your farm and infest your crops, reducing your yield and damaging your soil health. you question whether to purchase pesticides to protect your crops.", 0, { fill: '#ffffff' }, TYPEWRITER_SPEED.FAST,
                 () => {
                     createMenu(this, {
 

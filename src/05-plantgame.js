@@ -59,8 +59,8 @@ export default class planting_minigame extends Phaser.Scene {
         });
 
         centerText(this, "PRESS BUTTON WHEN DOT IS IN GREEN ZONE", -105, {
-            fill: "#ffffff",
-            fontSize: "14px",
+            fill: "COLORS.BLACK",
+            fontSize: "18px",
             align: "center"
         });
 
@@ -76,7 +76,7 @@ export default class planting_minigame extends Phaser.Scene {
         this.statusText = this.add.text(this.scale.width / 2, this.barY + 115, "", {
             fontFamily: "PressStart2P",
             fontSize: "13px",
-            fill: "#f0f14e",
+            fill: "#ffffff",
             align: "center"
         }).setOrigin(0.5, 0);
 

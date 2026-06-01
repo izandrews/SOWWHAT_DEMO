@@ -30,13 +30,12 @@ export default class trade_slots extends Phaser.Scene {
         this.cameras.main.setBackgroundColor(COLORS.RED);
         this.scene.setVisible(true, 'hud');
         escapeReset(this);
-
         const backgroundMusic = this.sound.get('backgroundMusic');
-        if (backgroundMusic) backgroundMusic.pause();
-
+        if (backgroundMusic) {
+            backgroundMusic.pause();
+        }
         this.slotsMusic = this.sound.add('slotsmusic', { loop: true, volume: 0.5 });
         this.slotsMusic.play();
-
         this.events.once('shutdown', () => {
             this.stopSlotsMusic();
         });
@@ -81,7 +80,7 @@ export default class trade_slots extends Phaser.Scene {
 
         const slotWidth = 100;
         const slotHeight = 120;
-        const slotY = frameCenterY + 140;
+        const slotY = MINIGAME_CONFIG.HEIGHT / 2 + 140;
         const startX = frameCenterX - 200;
 
         this.add.rectangle(startX, slotY, slotWidth, slotHeight, 0xffffff);
@@ -107,7 +106,7 @@ export default class trade_slots extends Phaser.Scene {
 
         this.spinButton = this.add.rectangle(
             frameCenterX,
-            frameCenterY + 150,
+            MINIGAME_CONFIG.HEIGHT / 2 + 150,
             200,
             60,
             0x000000,
@@ -127,7 +126,7 @@ export default class trade_slots extends Phaser.Scene {
             fontSize: '18px',
             align: 'center',
             fontFamily: '"Press Start 2P"',
-            fill: '#f0f14e'
+            fill: "COLORS.BLACK"
         });
 
         this.resultText.setText('PRESS BUTTON TO SPIN');
