@@ -11,7 +11,7 @@ export default class planting_minigame extends Phaser.Scene {
     preload() {
         this.load.font(
             'PressStart2P',
-            'https://raw.githubusercontent.com/google/fonts/refs/heads/main/ofl/pressstart2p/PressStart2P-Regular.ttf',
+            '../assets/PressStart2P-Regular.ttf',
             'truetype'
         );
     }
