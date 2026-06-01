@@ -13,7 +13,7 @@ export default class inspector_encounter extends Phaser.Scene {
 
         escapeReset(this);
         this.cameras.main.setBackgroundColor(COLORS.PRIMARY_BLUE);
-        this.scene.setVisible(true, 'hud');
+        this.scene.setVisible(false, 'hud');
         this.inspectorText = centerText(this, "SEED INSPECTOR INCOMING...", -60, { fontSize: FONTSIZE.HEADING, fill: COLORS.BLACK });
         this.tweens.add({
             targets: this.inspectorText,
