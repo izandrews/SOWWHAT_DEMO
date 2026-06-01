@@ -1,6 +1,7 @@
 import { centerText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
+import { isButtonPressed, GAMEPAD } from "../gamepad.js";
 
 export default class inspection_chase extends Phaser.Scene {
     constructor() {
@@ -154,7 +155,11 @@ export default class inspection_chase extends Phaser.Scene {
     }
 
     update() {
-        const jumpPressed = this.cursors.space.isDown || this.wKey.isDown || this.cursors.up.isDown;
+        const jumpPressed =
+        this.cursors.space.isDown ||
+        this.wKey.isDown ||
+        this.cursors.up.isDown ||
+        isButtonPressed(this, GAMEPAD.SELECT_BUTTON);
 
         // Start jump if key pressed, farmer grounded, and not already jumping
 

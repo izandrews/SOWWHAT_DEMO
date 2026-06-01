@@ -1,34 +1,33 @@
 import { centerText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
+import { isButtonPressed, GAMEPAD } from "../gamepad.js";
 
 export default class planting_minigame extends Phaser.Scene {
     constructor() {
         super("planting_minigame");
     }
 
-
     preload() {
         this.load.font(
             'PressStart2P',
             'https://raw.githubusercontent.com/google/fonts/refs/heads/main/ofl/pressstart2p/PressStart2P-Regular.ttf',
-            'truetype');
-
+            'truetype'
+        );
     }
+
     create() {
         escapeReset(this);
         this.cameras.main.setBackgroundColor("#ed3833");
 
-        // variable changes are handled by upstream scenes to keep the planting minigame focused on performance.
         this.scene.get('hud').updateStats();
 
-        // Create a filled rectangular frame centered on screen
         const frameGraphics = this.add.graphics();
         const centerX = this.scale.width / 2 - 400;
         const centerY = this.scale.height / 2 - 240;
-        frameGraphics.fillStyle(0x1645f5, 0.8); // fill color and alpha
+        frameGraphics.fillStyle(0x1645f5, 0.8);
         frameGraphics.fillRect(centerX, centerY, 800, 450);
-        frameGraphics.lineStyle(4, 0xffffff, 1); // 4px white border
+        frameGraphics.lineStyle(4, 0xffffff, 1);
         frameGraphics.strokeRect(centerX, centerY, 800, 450);
 
         this.hitsNeeded = 3;
@@ -51,8 +50,19 @@ export default class planting_minigame extends Phaser.Scene {
         this.markerDirection = 1;
         this.markerSpeed = this.barWidth * 1.05;
 
-        centerText(this, "SEED PLANTING", -200, { fill: "#ffffff", fontFamily: "PressStart2P", fontSize: "30px" });
-        centerText(this, "PRESS BUTTON WHEN DOT IS IN GREEN ZONE", -105, { fill: "#ffffff", fontSize: "14px", align: "center" });
+        this.selectWasDown = false;
+
+        centerText(this, "SEED PLANTING", -200, {
+            fill: "#ffffff",
+            fontFamily: "PressStart2P",
+            fontSize: "30px"
+        });
+
+        centerText(this, "PRESS BUTTON WHEN DOT IS IN GREEN ZONE", -105, {
+            fill: "#ffffff",
+            fontSize: "14px",
+            align: "center"
+        });
 
         this.graphics = this.add.graphics();
 
@@ -97,6 +107,14 @@ export default class planting_minigame extends Phaser.Scene {
     update(_, delta) {
         if (this.roundOver) return;
 
+        const selectDown = isButtonPressed(this, GAMEPAD.SELECT_BUTTON);
+
+        if (selectDown && !this.selectWasDown) {
+            this.tryHit();
+        }
+
+        this.selectWasDown = selectDown;
+
         this.markerX += this.markerDirection * this.markerSpeed * (delta / 700);
 
         if (this.markerX >= this.barX + this.barWidth) {
@@ -118,7 +136,8 @@ export default class planting_minigame extends Phaser.Scene {
     }
 
     isMarkerInsideSweetSpot() {
-        return this.markerX >= this.sweetSpotX && this.markerX <= this.sweetSpotX + this.sweetSpotWidth;
+        return this.markerX >= this.sweetSpotX &&
+            this.markerX <= this.sweetSpotX + this.sweetSpotWidth;
     }
 
     tryHit() {
@@ -139,7 +158,6 @@ export default class planting_minigame extends Phaser.Scene {
         this.updateHudText(this.statusText.text);
         this.redrawBar();
 
-        // Check if player has achieved 3 hits and end the round
         if (this.hits >= this.hitsNeeded) {
             this.time.delayedCall(250, () => this.finishRound());
         }
@@ -155,6 +173,7 @@ export default class planting_minigame extends Phaser.Scene {
 
     redrawBar() {
         this.graphics.clear();
+
         this.graphics.fillStyle(0x222222, 1);
         this.graphics.fillRect(this.barX - 4, this.barY - 4, this.barWidth + 8, this.barHeight + 8);
 
@@ -170,11 +189,14 @@ export default class planting_minigame extends Phaser.Scene {
 
     finishRound() {
         this.game.globalState.planting = 0;
+
         if (this.roundOver) return;
+
         this.roundOver = true;
         this.cleanupInput();
 
         let result = "BAD PLANTING";
+
         if (this.hits >= this.hitsNeeded) {
             if (this.attempts === this.hitsNeeded) {
                 result = "GOOD";
@@ -191,14 +213,17 @@ export default class planting_minigame extends Phaser.Scene {
             this.game.globalState.planting += 1;
         }
 
-        centerText(this, result, 165, { fill: "#ffffff", fontSize: "20px", align: "center" });
+        centerText(this, result, 165, {
+            fill: "#ffffff",
+            fontSize: "20px",
+            align: "center"
+        });
 
         createMenu(this, {
             title: [""],
             options: ["[ CONTINUE ]"],
             callbacks: [
-                () => this.scene.start("season3_choice"),
-
+                () => this.scene.start("season3_choice")
             ],
             startY: 240,
             gap: 36,
@@ -211,6 +236,7 @@ export default class planting_minigame extends Phaser.Scene {
         if (this.spaceKey && this.onSpaceDown) {
             this.spaceKey.off("down", this.onSpaceDown);
         }
+
         if (this.timer) {
             this.timer.remove(false);
             this.timer = null;

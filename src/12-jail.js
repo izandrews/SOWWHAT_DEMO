@@ -2,6 +2,7 @@ import { centerText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
 import { COLORS, OFFSETS } from "../constants.js";
+import { getStick } from "../gamepad.js";
 
 export default class escape_jail extends Phaser.Scene {
     constructor() {
@@ -597,12 +598,26 @@ export default class escape_jail extends Phaser.Scene {
         let vx = 0;
         let vy = 0;
 
-        if (this.cursors.left.isDown || this.wasd.A.isDown) vx -= moveSpeed;
-        if (this.cursors.right.isDown || this.wasd.D.isDown) vx += moveSpeed;
-        if (this.cursors.up.isDown || this.wasd.W.isDown) vy -= moveSpeed;
-        if (this.cursors.down.isDown || this.wasd.S.isDown) vy += moveSpeed;
+        const stick = getStick(this);
+
+        if (this.cursors.left.isDown || this.wasd.A.isDown) vx -= 1;
+        if (this.cursors.right.isDown || this.wasd.D.isDown) vx += 1;
+        if (this.cursors.up.isDown || this.wasd.W.isDown) vy -= 1;
+        if (this.cursors.down.isDown || this.wasd.S.isDown) vy += 1;
+
+        // Joystick overrides keyboard only when it is being moved
+        if (stick.x !== 0 || stick.y !== 0) {
+            vx = stick.x;
+            vy = stick.y;
+        }
 
         this.farmer.body.setVelocity(vx, vy);
+
+        if (this.farmer.body.velocity.length() > 0) {
+            this.farmer.body.velocity.normalize().scale(moveSpeed);
+        }
+
+
         this.farmer.body.velocity.normalize().scale(moveSpeed);
         if (this.farmer.body.velocity.x < -5) {
             this.farmer.setFlipX(true);

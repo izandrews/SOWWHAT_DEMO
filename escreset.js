@@ -20,10 +20,25 @@ export function escapeReset(scene) {
 
     esc.on("down", onDown);
 
+    let resetWasDown = false;
+
+    const gamepadResetUpdate = () => {
+        const resetDown = isButtonPressed(scene, GAMEPAD.RESET_BUTTON);
+
+        if (resetDown && !resetWasDown) {
+            onDown();
+        }
+
+        resetWasDown = resetDown;
+    };
+
+    scene.events.on("update", gamepadResetUpdate);
+
     // --- Cleanup on scene shutdown/destroy ---
     const cleanup = () => {
         esc.off("down", onDown);
         // optional: esc.destroy();  (Phaser handles key destruction automatically)
+        scene.events.off("update", gamepadResetUpdate);
         scene.events.off("shutdown", cleanup);
         scene.events.off("destroy", cleanup);
     };

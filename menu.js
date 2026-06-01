@@ -2,6 +2,7 @@
 // this is for keyboard toggles/input
 import { centerText } from "./ui.js";
 import { COLORS, FONTSIZE } from "./constants.js";
+import { getStick, isButtonPressed, GAMEPAD } from "./gamepad.js";
 
 export function createMenu(scene, {
 
@@ -46,6 +47,54 @@ export function createMenu(scene, {
         });
     };
     updateHighlight();
+
+    let lastMoveTime = 0;
+    let selectWasDown = false;
+
+    const moveUp = () => {
+        index = (index - 1 + options.length) % options.length;
+        updateHighlight();
+        try {
+            if (window.__globalMoveAudio) {
+                window.__globalMoveAudio.currentTime = 0;
+                window.__globalMoveAudio.play().catch(() => {});
+            }
+        } catch (e) {}
+    };
+
+    const moveDown = () => {
+        index = (index + 1) % options.length;
+        updateHighlight();
+        try {
+            if (window.__globalMoveAudio) {
+                window.__globalMoveAudio.currentTime = 0;
+                window.__globalMoveAudio.play().catch(() => {});
+            }
+        } catch (e) {}
+    };
+
+    const gamepadUpdate = () => {
+        const now = scene.time.now;
+        const stick = getStick(scene);
+
+        if (now - lastMoveTime > GAMEPAD.MENU_REPEAT_DELAY) {
+            if (stick.y < 0) {
+                moveUp();
+                lastMoveTime = now;
+            } else if (stick.y > 0) {
+                moveDown();
+                lastMoveTime = now;
+            }
+        }
+
+        const selectDown = isButtonPressed(scene, GAMEPAD.SELECT_BUTTON);
+        if (selectDown && !selectWasDown) {
+            selectHandler();
+        }
+        selectWasDown = selectDown;
+    };
+
+    scene.events.on("update", gamepadUpdate);
 
     // --- Input events for menu navigation and selection ---
     const K = Phaser.Input.Keyboard.KeyCodes;
@@ -136,6 +185,7 @@ export function createMenu(scene, {
     // Optionally return a cleanup function to remove listeners if needed
     return () => {
         listeners.forEach(listener => listener.remove && listener.remove());
+        scene.events.off("update", gamepadUpdate);
     };
 
     // --- Optional mouse click support ---
