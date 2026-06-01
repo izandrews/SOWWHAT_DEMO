@@ -85,21 +85,21 @@ export default class trade_slots extends Phaser.Scene {
 
         this.add.rectangle(startX, slotY, slotWidth, slotHeight, 0xffffff);
         this.slot1 = this.add.text(startX, slotY, '?', {
-            fontFamily: '"Press Start 2P"',
+            fontFamily: '"PressStart2P"',
             fontSize: '40px',
             color: '#000000'
         }).setOrigin(0.5);
 
         this.add.rectangle(startX + 200, slotY, slotWidth, slotHeight, 0xffffff);
         this.slot2 = this.add.text(startX + 200, slotY, '?', {
-            fontFamily: '"Press Start 2P"',
+            fontFamily: '"PressStart2P"',
             fontSize: '40px',
             color: '#000000'
         }).setOrigin(0.5);
 
         this.add.rectangle(startX + 400, slotY, slotWidth, slotHeight, 0xffffff);
         this.slot3 = this.add.text(startX + 400, slotY, '?', {
-            fontFamily: '"Press Start 2P"',
+            fontFamily: '"PressStart2P"',
             fontSize: '40px',
             color: '#000000'
         }).setOrigin(0.5);
@@ -116,7 +116,7 @@ export default class trade_slots extends Phaser.Scene {
         this.instructionText = centerText(this, '', 120, {
             fill: '#ffffff',
             fontSize: '14px',
-            fontFamily: '"Press Start 2P"',
+            fontFamily: '"PressStart2P"',
             wordWrap: { width: MINIGAME_CONFIG.WIDTH * 0.74, useAdvancedWrap: true },
         });
 
@@ -125,7 +125,7 @@ export default class trade_slots extends Phaser.Scene {
         this.resultText = centerText(this, '', -100, {
             fontSize: '18px',
             align: 'center',
-            fontFamily: '"Press Start 2P"',
+            fontFamily: '"PressStart2P"',
             fill: "COLORS.BLACK"
         });
 
