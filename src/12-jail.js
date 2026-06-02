@@ -3,6 +3,7 @@ import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
 import { COLORS, OFFSETS } from "../constants.js";
 import { getStick } from "./gamepad.js";
+import { MUSIC_VOLUME } from "./audioConstants.js";
 
 export default class escape_jail extends Phaser.Scene {
     constructor() {
@@ -29,7 +30,7 @@ export default class escape_jail extends Phaser.Scene {
         if (backgroundMusic) {
             backgroundMusic.pause();
         }
-        this.chaseMusic = this.sound.add('runjump_background', { loop: true, volume: 0.5 });
+        this.chaseMusic = this.sound.add('runjump_background', { loop: true, volume: MUSIC_VOLUME });
         this.chaseMusic.play();
         this.events.once('shutdown', () => {
             this.chaseMusic.stop();
@@ -650,10 +651,10 @@ export default class escape_jail extends Phaser.Scene {
         centerText(this, resultTitle, -16, { fill: resultColor, fontSize: "24px" });
 
         if (playerWon) {
-            this.sound.play('youwin');
+            this.sound.play('youwin', { volume: .2 });
             this.game.globalState.escapedJail = true;
         } else {
-            this.sound.play('youlost');
+            this.sound.play('youlost', { volume: .2 });
             this.game.globalState.escapedJail = false;
         }
         this.scene.get("hud").updateStats();

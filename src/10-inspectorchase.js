@@ -1,6 +1,7 @@
 import { centerText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
+import { MUSIC_VOLUME } from "./audioConstants.js";
 
 export default class inspection_chase extends Phaser.Scene {
     constructor() {
@@ -34,12 +35,12 @@ export default class inspection_chase extends Phaser.Scene {
         if (backgroundMusic) {
             backgroundMusic.pause();
         }
-        this.chaseMusic = this.sound.add('runjump_background', { loop: true, volume: 0.5 });
+        this.chaseMusic = this.sound.add('runjump_background', { loop: true, volume: MUSIC_VOLUME });
         this.chaseMusic.play();
         this.events.once('shutdown', () => {
             this.chaseMusic.stop();
         });
-        // this.sound.play('runjump_background', { loop: true, volume: 0.5 });
+        // this.sound.play('runjump_background', { loop: true, volume: MUSIC_VOLUME });
 
         // Create a filled rectangular frame centered on screen
         const frameGraphics = this.add.graphics();
@@ -306,7 +307,7 @@ export default class inspection_chase extends Phaser.Scene {
         console.log("Caught by the seed inspector!");
             this.chaseMusic.stop();
 
-        this.sound.play('youlost');
+        this.sound.play('youlost', { volume: .2 });
         this.endGame("you've been caught!\n\nYOU ARE UNDER ARREST", "#ed3833");
 
         createMenu(this, {
@@ -336,7 +337,7 @@ export default class inspection_chase extends Phaser.Scene {
         console.log("You escaped!");
             this.chaseMusic.stop();
 
-        this.sound.play('youwin');
+        this.sound.play('youwin', { volume: .2 });
         this.endGame("you've escaped!", "#33ff00");
         this.game.globalState.criminality += 1;
         this.getScene('hud').updateStats();

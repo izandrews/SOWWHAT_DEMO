@@ -1,3 +1,5 @@
+import { MUSIC_VOLUME } from "./audioConstants.js";
+
 export default class musicscene extends Phaser.Scene {
     constructor() {
         super("musicscene");
@@ -8,7 +10,7 @@ export default class musicscene extends Phaser.Scene {
     }
 
     create() {
-        const music = this.sound.play('backgroundMusic', { loop: true, volume: 0.5 });
+        const music = this.sound.play('backgroundMusic', { loop: true, volume: MUSIC_VOLUME });
         this.game.globalMusic = music;
     }
 }

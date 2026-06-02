@@ -3,6 +3,7 @@ import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
 import { COLORS, MINIGAME_CONFIG } from "../constants.js";
 import { isButtonPressed, GAMEPAD } from "./gamepad.js";
+import { MUSIC_VOLUME } from "./audioConstants.js";
 
 export default class trade_slots extends Phaser.Scene {
     constructor() {
@@ -34,7 +35,7 @@ export default class trade_slots extends Phaser.Scene {
         if (backgroundMusic) {
             backgroundMusic.pause();
         }
-        this.slotsMusic = this.sound.add('slotsmusic', { loop: true, volume: 0.5 });
+        this.slotsMusic = this.sound.add('slotsmusic', { loop: true, volume: MUSIC_VOLUME });
         this.slotsMusic.play();
         this.events.once('shutdown', () => {
             this.stopSlotsMusic();
@@ -156,7 +157,7 @@ export default class trade_slots extends Phaser.Scene {
         this.hasSpun = true;
         this.isSpinning = true;
         this.resultText.setText('');
-        this.sound.play('slotsound');
+        this.sound.play('slotsound', { volume: MUSIC_VOLUME });
 
         const neighborScore = this.game.globalState.neighborScore;
 
@@ -217,7 +218,7 @@ export default class trade_slots extends Phaser.Scene {
             this.slot2.setColor("#33ff00");
             this.slot3.setColor("#33ff00");
             this.stopSlotsMusic();
-            this.sound.play('youwin');
+            this.sound.play('youwin', { volume: .2 });
 
             if (this.game.globalState.certified) {
                 this.instructionText.setText("your neighbours offer you their seeds, but they are uncertified and illegal to plant.");
@@ -247,7 +248,7 @@ export default class trade_slots extends Phaser.Scene {
             this.slot2.setColor("#ed3833");
             this.slot3.setColor("#ed3833");
             this.stopSlotsMusic();
-            this.sound.play('youlost');
+            this.sound.play('youlost', { volume: 0.2 });
 
             this.instructionText.setText("you must resort to planting your old stored seeds illegally, risking fines and criminal charges.");
 
