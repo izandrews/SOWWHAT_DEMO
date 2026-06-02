@@ -10,7 +10,7 @@ export default class musicscene extends Phaser.Scene {
     }
 
     create() {
-        const music = this.sound.play('backgroundMusic', { loop: true, volume: MUSIC_VOLUME });
+        const music = this.sound.play('backgroundMusic', { loop: true, volume: .5 });
         this.game.globalMusic = music;
     }
 }

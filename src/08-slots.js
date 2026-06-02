@@ -258,7 +258,7 @@ export default class trade_slots extends Phaser.Scene {
                 callbacks: [
                     () => {
                         const backgroundMusic = this.sound.get('backgroundMusic');
-                        if (backgroundMusic) backgroundMusic.resume();
+                        if (backgroundMusic) backgroundMusic.resume({ volume: 0.5 });
 
                         this.game.globalState.fines += 20;
                         this.game.globalState.criminality += 2;
