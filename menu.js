@@ -37,7 +37,7 @@ export function createMenu(scene, {
 
     let index = 0;
     let lastMoveTime = 0;
-    let selectWasDown = false;
+    let selectWasDown = isButtonPressed(scene, GAMEPAD.SELECT_BUTTON);
 
     const playMoveSound = () => {
         try {
