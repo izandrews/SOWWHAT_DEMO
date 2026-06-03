@@ -37,7 +37,9 @@ export function createMenu(scene, {
 
     let index = 0;
     let lastMoveTime = 0;
-    let selectWasDown = isButtonPressed(scene, GAMEPAD.SELECT_BUTTON);
+    // let selectWasDown = isButtonPressed(scene, GAMEPAD.SELECT_BUTTON);
+    let selectWasDown = false;
+
 
     const playMoveSound = () => {
         try {
@@ -49,7 +51,7 @@ export function createMenu(scene, {
                 scene.sound.play("menuMove");
             } else if (window.__globalMoveAudio) {
                 window.__globalMoveAudio.currentTime = 0;
-                window.__globalMoveAudio.play().catch(() => {});
+                window.__globalMoveAudio.play().catch(() => { });
             }
         } catch (e) {
             console.warn("Failed to play move sound", e);
@@ -66,7 +68,7 @@ export function createMenu(scene, {
                 scene.sound.play("menuSelect");
             } else if (window.__globalSelectAudio) {
                 window.__globalSelectAudio.currentTime = 0;
-                window.__globalSelectAudio.play().catch(() => {});
+                window.__globalSelectAudio.play().catch(() => { });
             }
         } catch (e) {
             console.warn("Failed to play select sound", e);
