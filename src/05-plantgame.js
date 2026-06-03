@@ -50,7 +50,7 @@ export default class planting_minigame extends Phaser.Scene {
         this.markerDirection = 1;
         this.markerSpeed = this.barWidth * 1.05;
 
-        this.selectWasDown = false;
+        this.selectWasDown = isButtonPressed(this, GAMEPAD.SELECT_BUTTON);
 
         centerText(this, "SEED PLANTING", -200, {
             fill: "#ffffff",

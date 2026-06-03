@@ -59,7 +59,7 @@ export default class trade_slots extends Phaser.Scene {
         this.resultText = null;
         this.isSpinning = false;
         this.hasSpun = false;
-        this.selectWasDown = false;
+        this.selectWasDown = isButtonPressed(this, GAMEPAD.SELECT_BUTTON);
 
         const symbols = ['1', '2', '3', '4', '5', '6'];
 

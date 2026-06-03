@@ -4,6 +4,8 @@ export function escapeReset(scene) {
         Phaser.Input.Keyboard.KeyCodes.ESC
     );
 
+    let resetWasDown = isButtonPressed(scene, GAMEPAD.RESET_BUTTON);
+
     const onDown = () => {
         if (scene.game.globalState?.reset) {
             scene.game.globalState.reset();
@@ -19,8 +21,6 @@ export function escapeReset(scene) {
     };
 
     esc.on("down", onDown);
-
-    let resetWasDown = false;
 
     const gamepadResetUpdate = () => {
         const resetDown = isButtonPressed(scene, GAMEPAD.RESET_BUTTON);

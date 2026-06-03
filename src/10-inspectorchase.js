@@ -1,6 +1,7 @@
 import { centerText } from "../ui.js";
 import { createMenu } from "../menu.js";
 import { escapeReset } from "../escreset.js";
+import { isButtonPressed, GAMEPAD } from "./gamepad.js";
 import { MUSIC_VOLUME } from "./audioConstants.js";
 
 export default class inspection_chase extends Phaser.Scene {
@@ -69,6 +70,7 @@ export default class inspection_chase extends Phaser.Scene {
         this.inspectorJumpTriggerDistance = 30;
         this.inspectorJumpCooldownMs = 220;
         this.inspectorLastJumpTime = -9999;
+        this.selectWasDown = isButtonPressed(this, GAMEPAD.SELECT_BUTTON);
         this.gameIsOver = false;
 
         // Enable physics for this scene
@@ -156,14 +158,19 @@ export default class inspection_chase extends Phaser.Scene {
 
     update() {
         const jumpPressed = this.cursors.space.isDown || this.wKey.isDown || this.cursors.up.isDown;
+        const selectDown = isButtonPressed(this, GAMEPAD.SELECT_BUTTON);
 
-        // Start jump if key pressed, farmer grounded, and not already jumping
+        const jumpTriggered = (selectDown && !this.selectWasDown) || jumpPressed;
 
-        if (this.farmer && this.farmer.body && jumpPressed && this.farmer.body.touching.down && !this.isJumping) {
+        // Start jump if jump button pressed, farmer grounded, and not already jumping
+
+        if (this.farmer && this.farmer.body && jumpTriggered && this.farmer.body.touching.down && !this.isJumping) {
             this.farmer.body.setVelocityY(-650);
             this.isJumping = true;
             console.log("Jumped!");
         }
+
+        this.selectWasDown = selectDown;
         // if (this.farmer && this.farmer.body && jumpPressed && this.farmer.body.touching.down && !this.isJumping) {
         //     this.jumpKeyPressTime = this.time.now;
         //     this.isJumping = true;
