@@ -7,17 +7,37 @@ export function escapeReset(scene) {
     let resetWasDown = isButtonPressed(scene, GAMEPAD.RESET_BUTTON);
 
     const onDown = () => {
-        if (scene.game.globalState?.reset) {
-            scene.game.globalState.reset();
-        }
+        try {
+            if (scene.game.globalState?.reset) {
+                scene.game.globalState.reset();
+            }
+        } catch (e) { }
 
         // Hide HUD if active
         if (scene.scene.isActive("hud")) {
             scene.scene.setVisible(false, "hud");
         }
 
-        scene.scene.start("hud");
-        scene.scene.start("title_scene");
+        // Hard restart: clear storage/caches and reload with cache-busting query
+        const doHardRestart = () => {
+            try {
+                try { localStorage.clear(); sessionStorage.clear(); } catch (e) { }
+
+                if (typeof caches !== 'undefined' && caches && typeof caches.keys === 'function') {
+                    caches.keys()
+                        .then(keys => Promise.all(keys.map(k => caches.delete(k))))
+                        .finally(() => {
+                            window.location.href = window.location.pathname + '?_=' + Date.now();
+                        });
+                } else {
+                    window.location.href = window.location.pathname + '?_=' + Date.now();
+                }
+            } catch (e) {
+                try { window.location.reload(); } catch (e) { /* ignore */ }
+            }
+        };
+
+        doHardRestart();
     };
 
     esc.on("down", onDown);

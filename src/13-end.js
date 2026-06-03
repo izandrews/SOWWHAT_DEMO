@@ -32,17 +32,39 @@ export default class demo_ending extends Phaser.Scene {
             options: ["[ RETURN TO TITLE ]"],
             callbacks: [
                 () => {
-                    // if (this.game.globalState?.reset) {
-                    //     this.game.globalState.reset();
-                    // }
+                    try {
+                        if (this.game.globalState?.reset) {
+                            this.game.globalState.reset();
+                        }
+                    } catch (e) { }
 
                     // Hide HUD if active
                     if (this.scene.isActive("hud")) {
                         this.scene.setVisible(false, "hud");
                     }
 
-                    // this.scene.start("hud");
-                    this.scene.start("title_scene");
+                    // Perform a hard restart: clear storage/caches and reload the page with a cache-busting query.
+                    // This helps fully reset the app and attached browser state (including gamepad/service-worker caches).
+                    const doHardRestart = () => {
+                        try {
+                            try { localStorage.clear(); sessionStorage.clear(); } catch (e) { }
+
+                            if (typeof caches !== 'undefined' && caches && typeof caches.keys === 'function') {
+                                caches.keys()
+                                    .then(keys => Promise.all(keys.map(k => caches.delete(k))))
+                                    .finally(() => {
+                                        window.location.href = window.location.pathname + '?_=' + Date.now();
+                                    });
+                            } else {
+                                window.location.href = window.location.pathname + '?_=' + Date.now();
+                            }
+                        } catch (e) {
+                            // Fallback to a normal reload if anything goes wrong
+                            try { window.location.reload(); } catch (e) { /* ignore */ }
+                        }
+                    };
+
+                    doHardRestart();
                 }
             ],
             startY: 220,
