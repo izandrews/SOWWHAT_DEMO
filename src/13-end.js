@@ -32,16 +32,16 @@ export default class demo_ending extends Phaser.Scene {
             options: ["[ RETURN TO TITLE ]"],
             callbacks: [
                 () => {
-                    if (this.game.globalState?.reset) {
-                        this.game.globalState.reset();
-                    }
+                    // if (this.game.globalState?.reset) {
+                    //     this.game.globalState.reset();
+                    // }
 
                     // Hide HUD if active
                     if (this.scene.isActive("hud")) {
                         this.scene.setVisible(false, "hud");
                     }
 
-                    this.scene.start("hud");
+                    // this.scene.start("hud");
                     this.scene.start("title_scene");
                 }
             ],
