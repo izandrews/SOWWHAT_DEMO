@@ -29,7 +29,7 @@ export function getStick(scene) {
         Physical LEFT  reads as UP     => rawY negative
         Physical RIGHT reads as DOWN   => rawY positive
         Physical DOWN  reads as LEFT   => rawX negative
-
+in 
         Desired logical mapping:
         logical UP    = physical UP
         logical DOWN  = physical DOWN

@@ -84,15 +84,19 @@ export function createMenu(scene, {
     };
 
     const moveUp = () => {
-        index = (index - 1 + options.length) % options.length;
-        updateHighlight();
-        playMoveSound();
+        if (index > 0) {
+            index = index - 1;
+            updateHighlight();
+            playMoveSound();
+        }
     };
 
     const moveDown = () => {
-        index = (index + 1) % options.length;
-        updateHighlight();
-        playMoveSound();
+        if (index < options.length - 1) {
+            index = index + 1;
+            updateHighlight();
+            playMoveSound();
+        }
     };
 
     const selectHandler = () => {
